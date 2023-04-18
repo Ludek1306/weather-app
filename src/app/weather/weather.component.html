@@ -1,0 +1,57 @@
+<div class="input-container">
+  <form [formGroup]="weatherForm">
+    <div class="mb-3">
+      <label for="input-city" class="form-label"
+        >Search City:<span id="wrong-city">{{ cityNotFound }}</span></label
+      >
+      <input
+        #city
+        type="text"
+        class="form-control"
+        id="input-city"
+        formControlName="item"
+      />
+    </div>
+    <button
+      type="submit"
+      (click)="addCity()"
+      class="btn btn-primary"
+      [disabled]="weatherForm.invalid"
+    >
+      Submit
+    </button>
+  </form>
+</div>
+
+<div class="city-empty" *ngIf="!citiesList.length">
+  There is no selected city.
+</div>
+
+<div class="weather-container">
+  <div *ngFor="let singleCity of citiesList; let i = index">
+    <div class="card text-white bg-primary m-2" style="max-width: 18rem">
+      <div class="card-header text-center">
+        <h2>{{ singleCity.name }}</h2>
+        <img src="{{ singleCity.iconURL }}" alt="weather image" />
+      </div>
+      <div class="card-body">
+        <p class="card-text">Summary: {{ singleCity.summary }}</p>
+        <p class="card-text">Temperature: {{ singleCity.temperature }} °C</p>
+        <p class="card-text">Feels like: {{ singleCity.feelsLikeTemp }} °C</p>
+        <p class="card-text">Pressure: {{ singleCity.pressure }} hPa</p>
+        <p class="card-text">humidity: {{ singleCity.humidity }} %</p>
+      </div>
+      <div class="card-footer bg-transparent border-success">
+        <div class="delete-button">
+          <button
+            type="button"
+            class="btn btn-light m-3"
+            (click)="deleteCity(i)"
+          >
+            Delete
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
