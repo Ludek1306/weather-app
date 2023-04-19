@@ -4,7 +4,7 @@ import { WeatherComponent } from './weather/weather.component';
 
 const routes: Routes = [
   {
-    path: '',
+    path: 'weather-app',
     component: WeatherComponent,
   },
 ];
